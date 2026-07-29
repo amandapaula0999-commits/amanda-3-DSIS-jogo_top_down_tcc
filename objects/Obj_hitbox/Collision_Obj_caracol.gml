@@ -1,4 +1,4 @@
-#region/////////------COLISÃO E IMPACTO DO GOLPE
+ #region/////////------COLISÃO E IMPACTO DO GOLPE
 
 
 // Subtrai a vida do caracol se a variável existir
