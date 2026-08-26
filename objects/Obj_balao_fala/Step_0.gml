@@ -1,12 +1,19 @@
-#region/////////------ANIMAÇÃO E SEGUIR O NPC
+#region/////////------ANIMAÇÃO DE ABERTURA E DIGITAÇÃO
 
-// Efeito de animação abrindo suavemente
+// Animação de abertura do balão
 escala = lerp(escala, escala_alvo, velocidade_anim);
 
-//Acompanha o NPC em tempo real se ele estiver se movendo
+//  Aumenta a quantidade de letras exibidas com o tempo
+if (escala >= 0.8) {
+    if (letras_exibidas < string_length(texto_fala)) {
+        letras_exibidas += velocidade_digitacao;
+    }
+}
+
+// Posição em cima do NPC
 if (dono != noone && instance_exists(dono)) {
     x = dono.x;
-    y = dono.y - 32; // Ajuste para a altura acima da cabeça do NPC
+    y = dono.y - 18;
 }
 
 #endregion////////////////////////////////

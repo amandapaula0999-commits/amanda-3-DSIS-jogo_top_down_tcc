@@ -1,12 +1,15 @@
-#region/////////------INICIALIZAÇÃO DO BALÃO
+#region/////////------CONFIGURAÇÃO E EFEITO DIGITANDO
 
-// Variáveis recebidas externamente do NPC
-dono = noone; // Quem falou (ID do NPC)
-texto_fala = "";// Texto que será exibido
+dono = noone;
+texto_fala = "";
 
-// Animação de Surgimento (Pop-in)
-escala = 0;   // Começa invisível (tamanho 0)
-escala_alvo = 1;     // Tamanho normal (100%)
-velocidade_anim = 0.15; // Velocidade de abertura
+// Variáveis para a animação de digitação
+letras_exibidas = 0; // Quantidade atual de caracteres mostrados
+velocidade_digitacao = 0.5; // Velocidade da digitação (maior = mais rápido)
+
+// Animação de abertura
+escala = 0;
+escala_alvo = 1;
+velocidade_anim = 0.15;
 
 #endregion////////////////////////////////
