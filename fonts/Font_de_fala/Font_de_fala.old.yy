@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"Font1",
+  "%Name":"Font_de_fala",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":21,
@@ -494,7 +494,7 @@
   "last":0,
   "lineHeight":27,
   "maintainGms1Font":false,
-  "name":"Font1",
+  "name":"Font_de_fala",
   "parent":{
     "name":"tcc",
     "path":"tcc.yyp",
