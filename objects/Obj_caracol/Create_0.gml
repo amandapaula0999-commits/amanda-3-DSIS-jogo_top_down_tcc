@@ -1,6 +1,6 @@
 #region/////////------ VIDA DO INIMIGO
 
-vida = 20;
+vida = 10;
 tomou_dano = false;
 morrendo = false;
 

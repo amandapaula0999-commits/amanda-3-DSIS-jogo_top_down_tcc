@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"tcc",
-    "path":"tcc.yyp",
+    "name":"rooms",
+    "path":"folders/rooms.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

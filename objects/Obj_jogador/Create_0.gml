@@ -16,7 +16,7 @@ lado = 0; // Controla a direção do sprite 0: Baixo, 1: Cima, 2: Direita, 3: Es
 
 #region/////////------SISTEMA DE VIDA E CHECKPOINT
 
-vida_max = 30;
+vida_max = 2;
 vida = vida_max;
 
 // Invulnerabilidade

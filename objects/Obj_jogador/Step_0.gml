@@ -104,7 +104,7 @@ if (_arma_perto != noone) {
         var _distancia = point_distance(x, y, _arma_perto.x, _arma_perto.y);
         
         // Se estiver ao alcance e pressionar "E"
-        if (_distancia <= 20 && keyboard_check_pressed(ord("E"))) {
+        if (_distancia <= 90 && keyboard_check_pressed(ord("E"))) {
             _arma_perto.dono = id; // Define jogador como dono
         }
     }
@@ -145,7 +145,7 @@ if (_cano_perto != noone) {
         var _dist_cano = point_distance(x, y, _cano_perto.x, _cano_perto.y);
         
         // Se estiver perto e pressionar "E"
-        if (_dist_cano <= 20 && keyboard_check_pressed(ord("E"))) {
+        if (_dist_cano <= 90 && keyboard_check_pressed(ord("E"))) {
             _cano_perto.dono = id; // O jogador vira o dono do cano hihih
         }
     }
