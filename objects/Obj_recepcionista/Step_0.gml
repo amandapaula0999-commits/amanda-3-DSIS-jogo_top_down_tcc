@@ -1,46 +1,74 @@
-#region/////////------SISTEMA DE DIÁLOGO E INTERAÇÃO
+#region/////////------SISTEMA DE DIÁLOGO E INTERAÇÃO 
 
-// Define qual é o texto completo do momento baseado no número da fala
-if (fala_atual_num == 1) texto_completo = fala_1;
-if (fala_atual_num == 2) texto_completo = fala_2;
-if (fala_atual_num == 3) texto_completo = fala_3;
-if (fala_atual_num == 4) texto_completo = fala_4;
+// CARREGAMENTO DA FALA ATUAL
+if (fala_atual_num == 1 && variable_instance_exists(id, "fala_1")) texto_completo = fala_1;
+if (fala_atual_num == 2 && variable_instance_exists(id, "fala_2")) texto_completo = fala_2;
+if (fala_atual_num == 3 && variable_instance_exists(id, "fala_3")) texto_completo = fala_3;
+if (fala_atual_num == 4 && variable_instance_exists(id, "fala_4")) texto_completo = fala_4;
 
-// Interação para abrir o diálogo
+
+// VERIFICAÇÃO DE PROXIMIDADE DO JOGADOR
+
+var _jogador = instance_nearest(x, y, Obj_jogador);
+
+
+//  CONTROLE DE ABERTURA E NAVEGAÇÃO DO DIÁLOGO
+
 if (!exibir_dialogo) {
-    if (keyboard_check_pressed(ord("E")) && distance_to_object(all) < 32) {
-        exibir_dialogo = true;
-        fala_atual_num = 1;
-        char_index = 0;
-        texto_atual = "";
+    
+ #region ----- ESTADO: DIÁLOGO FECHADO
+    
+    if (_jogador != noone) {
+        var _dialogo_livre = !variable_global_exists("dialogo_ativo") || !global.dialogo_ativo;
+        
+        // Abre a conversa se pressionar Espaço, estiver perto e nenhum diálogo estiver ativo
+        if (keyboard_check_pressed(vk_space) && distance_to_object(_jogador) < 32 && _dialogo_livre) {
+            exibir_dialogo      = true;
+            global.dialogo_ativo = true; // Trava outros NPCs
+            fala_atual_num      = 1;
+            char_index          = 0;
+            texto_atual         = "";
+        }
     }
+    
+    #endregion
+    
 } else {
-    // Se o diálogo já estiver aberto e qualquer tecla for pressionada
+
+ #region ------ ESTADO: DIÁLOGO ABERTO
+    
+    // Avança ou completa a fala ao pressionar Espaço
     if (keyboard_check_pressed(vk_space)) {
         
-        //  Se o texto ainda está sendo digitado, completa ele imediatamente
+        // Se ainda está digitando, exibe a frase inteira imediatamente
         if (char_index < string_length(texto_completo)) {
-            char_index = string_length(texto_completo);
+            char_index  = string_length(texto_completo);
             texto_atual = texto_completo;
         } 
-        // Se o texto já estava completo, passa para a próxima fala ou fecha
+        // Se já completou a frase, avança para a próxima ou encerra
         else {
             if (fala_atual_num < total_falas) {
                 fala_atual_num += 1;
-                char_index = 0;
-                texto_atual = "";
+                char_index      = 0;
+                texto_atual     = "";
             } else {
-                exibir_dialogo = false;
-                fala_atual_num = 1;
+                exibir_dialogo       = false;
+                global.dialogo_ativo = false; // Destrava o sistema para outros NPCs
+                fala_atual_num       = 1;
             }
         }
     }
 
-    // Avança o efeito de digitação gradualmente
+ #endregion
+
+ #region ------ EFEITO DE DIGITAÇÃO PROGRESSIVA
+    
     if (char_index < string_length(texto_completo)) {
         char_index += velocidade_texto;
         texto_atual = string_copy(texto_completo, 1, floor(char_index));
     }
+    
+    #endregion
 }
 
 #endregion////////////////////////////////

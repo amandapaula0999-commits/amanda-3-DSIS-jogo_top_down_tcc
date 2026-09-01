@@ -6,14 +6,14 @@ fala_2 = "Feito pelo grupo composto por Batata (eu) [fiz o código do jogo], Isa
 fala_3 = "Luis Algu [meu namorado, ele fez a história do jogo, as falas e como ia ser os mapas e designs no geral].";
 fala_4 = "Luiz [vulgo rato político, a seita].";
 
-// Controle de qual fala está ativa (1, 2, 3 ou 4)
+// Controle de quantidade e progressão das falas
 fala_atual_num = 1;
-total_falas = 4;
+total_falas = 4; // Altere este número de acordo com a quantidade de falas do NPC
 
-// Controle de exibição
+// Controle de exibição e trava
 exibir_dialogo = false;
 
-// Variáveis para o efeito de digitação
+// Variáveis para o efeito de digitação (maquininha)
 texto_atual = "";
 texto_completo = "";
 char_index = 0;
