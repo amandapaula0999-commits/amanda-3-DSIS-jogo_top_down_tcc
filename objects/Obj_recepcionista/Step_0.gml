@@ -22,7 +22,7 @@ if (!exibir_dialogo) {
         var _dialogo_livre = !variable_global_exists("dialogo_ativo") || !global.dialogo_ativo;
         
         // Abre a conversa se pressionar Espaço, estiver perto e nenhum diálogo estiver ativo
-        if (keyboard_check_pressed(vk_space) && distance_to_object(_jogador) < 32 && _dialogo_livre) {
+        if (keyboard_check_pressed(ord("E")) && distance_to_object(_jogador) < 32 && _dialogo_livre) {
             exibir_dialogo      = true;
             global.dialogo_ativo = true; // Trava outros NPCs
             fala_atual_num      = 1;
