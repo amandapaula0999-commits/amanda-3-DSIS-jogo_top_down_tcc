@@ -36,7 +36,6 @@
     {"id":{"name":"Font_de_fala","path":"fonts/Font_de_fala/Font_de_fala.yy",},},
     {"id":{"name":"Obj_armaPregos","path":"objects/Obj_armaPregos/Obj_armaPregos.yy",},},
     {"id":{"name":"Obj_bala","path":"objects/Obj_bala/Obj_bala.yy",},},
-    {"id":{"name":"Obj_balao_fala","path":"objects/Obj_balao_fala/Obj_balao_fala.yy",},},
     {"id":{"name":"Obj_boss","path":"objects/Obj_boss/Obj_boss.yy",},},
     {"id":{"name":"Obj_caixaPregos","path":"objects/Obj_caixaPregos/Obj_caixaPregos.yy",},},
     {"id":{"name":"Obj_cano","path":"objects/Obj_cano/Obj_cano.yy",},},

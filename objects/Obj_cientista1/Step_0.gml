@@ -1,22 +1,45 @@
-#region/////////------INTERAÇÃO COM A TECLA E
+#region/////////------SISTEMA DE DIÁLOGO E INTERAÇÃO
 
-if (instance_exists(Obj_jogador)) {
-    var _distancia = point_distance(x, y, Obj_jogador.x, Obj_jogador.y);
-    
-    // Se o jogador estiver perto e apertar "E"
-    if (_distancia <= 900 && keyboard_check_pressed(ord("E"))) {
+// Define qual é o texto completo do momento baseado no número da fala
+if (fala_atual_num == 1) texto_completo = fala_1;
+if (fala_atual_num == 2) texto_completo = fala_2;
+if (fala_atual_num == 3) texto_completo = fala_3;
+if (fala_atual_num == 4) texto_completo = fala_4;
+
+// Interação para abrir o diálogo
+if (!exibir_dialogo) {
+    if (keyboard_check_pressed(ord("E")) && distance_to_object(all) < 32) {
+        exibir_dialogo = true;
+        fala_atual_num = 1;
+        char_index = 0;
+        texto_atual = "";
+    }
+} else {
+    // Se o diálogo já estiver aberto e qualquer tecla for pressionada
+    if (keyboard_check_pressed(vk_anykey)) {
         
-        if (!instance_exists(meu_balao)) {
-            // Cria o balão chamando o Obj_balao_fala
-            meu_balao = instance_create_layer(x, y - 18, "Instances", Obj_balao_fala);
-            meu_balao.dono = id;
-            meu_balao.texto_fala = texto_npc;
+        // PASSO 1: Se o texto ainda está sendo digitado, completa ele imediatamente
+        if (char_index < string_length(texto_completo)) {
+            char_index = string_length(texto_completo);
+            texto_atual = texto_completo;
         } 
+        // PASSO 2: Se o texto já estava completo, passa para a próxima fala ou fecha
         else {
-            // Fecha o balão se apertar "E" novamente
-            instance_destroy(meu_balao);
-            meu_balao = noone;
+            if (fala_atual_num < total_falas) {
+                fala_atual_num += 1;
+                char_index = 0;
+                texto_atual = "";
+            } else {
+                exibir_dialogo = false;
+                fala_atual_num = 1;
+            }
         }
+    }
+
+    // Avança o efeito de digitação gradualmente
+    if (char_index < string_length(texto_completo)) {
+        char_index += velocidade_texto;
+        texto_atual = string_copy(texto_completo, 1, floor(char_index));
     }
 }
 
