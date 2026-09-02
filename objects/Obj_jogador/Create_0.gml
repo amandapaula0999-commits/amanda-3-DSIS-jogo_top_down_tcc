@@ -1,6 +1,6 @@
 #region/////////------VARIÁVEIS DE MOVIMENTAÇÃO
 
-max_vel = 9; // A velocidade máxima 
+max_vel = 10; // A velocidade máxima 
 velh = 0; // Velocidade no eixo X
 velv = 0; //Velocidade no eixo Y
 
