@@ -1,21 +1,11 @@
-#region /////////------ CONFIGURAÇÃO INICIAL DO BOSS
+velocidade_boss = 2;
+velocidade_retorno = 3;
 
-// Posição inicial onde o boss fica escondido
-pos_x_inicial = x;
-pos_y_inicial = y;
+x_inicial = x;
+y_inicial = y;
 
-// Velocidade de movimento do boss
-velocidade = 1;
+visible = false;
+speed = 0;
 
-// Estado inicial do boss
-estado = "esperando";
-
-// Variável global para controle da chave
-if (!variable_global_exists("chave_pega")) {
-    global.chave_pega = false;
-}
-
-// Direção padrão que o boss começa olhando (0 = Baixo, 1 = Cima, 2 = Direita, 3 = Esquerda)
-lado = 0;
-
-#endregion ////////////////////////////////
+// Registra a direção inicial (virado para baixo)
+dir_olhando = 270;
