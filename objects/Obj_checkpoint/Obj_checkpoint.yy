@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Spr_checkpoint",
-    "path":"sprites/Spr_checkpoint/Spr_checkpoint.yy",
+    "name":"Spr_checkpoint_acido",
+    "path":"sprites/Spr_checkpoint_acido/Spr_checkpoint_acido.yy",
   },
   "spriteMaskId":null,
   "visible":true,

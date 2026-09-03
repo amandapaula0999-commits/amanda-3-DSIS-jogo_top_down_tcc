@@ -1,12 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"Obj_acido",
+  "%Name":"Obj_barril",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"Obj_acido",
+  "name":"Obj_barril",
   "overriddenProperties":[],
   "parent":{
     "name":"tcc",
@@ -31,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Spr_checkpoint_acido",
-    "path":"sprites/Spr_checkpoint_acido/Spr_checkpoint_acido.yy",
+    "name":"Spr_barril",
+    "path":"sprites/Spr_barril/Spr_barril.yy",
   },
   "spriteMaskId":null,
   "visible":true,
