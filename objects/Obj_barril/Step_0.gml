@@ -15,18 +15,20 @@ if (!quebrado) {
     }
 }
 
-// Verifica se chegou no penúltimo frame para iniciar o sumiço gradual
+// Quando chegar no último frame da animação de queda, trava o frame e inicia a transição
 if (sprite_index == Spr_barril_caindo) {
-    var _penultimo_frame = image_number - 2;
+    var _ultimo_frame = image_number - 1;
     
-    if (image_index >= _penultimo_frame) {
+    if (image_index >= _ultimo_frame) {
+        image_index = _ultimo_frame; // Trava o desenho no último frame
+        image_speed = 0;             // Interrompe a animação para não dar loop
         transicao_iniciada = true;
     }
 }
 
 // Se a transição começou, reduz o alpha (transparência)
 if (transicao_iniciada) {
-    alpha_caindo -= 0.005; // Ajuste este valor se quiser mais rápido ou mais devagar
+    alpha_caindo -= 0.005; // Ajuste para sumir mais rápido ou mais devagar
     
     // Quando sumir por completo, fixa permanentemente na sprite do chão
     if (alpha_caindo <= 0) {
