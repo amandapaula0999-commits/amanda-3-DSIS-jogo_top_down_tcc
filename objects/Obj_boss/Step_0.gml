@@ -1,29 +1,30 @@
 #region /////////------ MAQUINA DE ESTADOS DO BOSS
 
-// ESTADO: ESPERANDO
+// ESTADO: ESPERANDO (Invisível e sem colisão até pegar a chave)
 if (estado == "esperando") {
     visible = false;
+    mask_index = -1; // Desativa a colisão para não causar dano enquanto oculto
+    speed = 0;
     
     if (global.chave_pega == true && instance_exists(Obj_jogador)) {
         if (position_meeting(Obj_jogador.x, Obj_jogador.y, Obj_area_boos)) {
             
-            // Reseta a posição para onde foi colocado no editor
+            // Posiciona no local correto
             x = pos_x_inicial;
             y = pos_y_inicial;
             
-            // Fica visível
+            // Fica visível e reativa a colisão normal do corpo
             visible = true;
+            mask_index = sprite_index;
             
-            // Muda para um estado de pausa
+            // Pausa por 2 segundos antes de perseguir
             estado = "pausado";
-            
-            // Define o tempo de espera: 2 segundos
             alarm[0] = game_get_speed(gamespeed_fps) * 2;
         }
     }
 }
 
-// ESTADO: PAUSADO (O Boss fica parado esperando o alarme)
+// ESTADO: PAUSADO
 else if (estado == "pausado") {
     speed = 0;
 }
@@ -49,7 +50,6 @@ else if (estado == "perseguindo") {
 // ESTADO: VOLTANDO
 else if (estado == "voltando") {
     if (instance_exists(Obj_jogador) && position_meeting(Obj_jogador.x, Obj_jogador.y, Obj_area_boos)) {
-        // Se o jogador voltar enquanto ele recua, faz a pausa de 2s novamente
         estado = "pausado";
         alarm[0] = game_get_speed(gamespeed_fps) * 2;
     } 
@@ -70,47 +70,63 @@ else if (estado == "voltando") {
 
 #region /////////------ CHECAGEM DO ÁCIDO E TROCA DE SPRITES
 
-// Prioridade máxima: se estiver no estado derrotado
+// Se já foi derrotado, trava na sprite caído
 if (estado == "derrotado_acido") {
     sprite_index = Spr_boos_caido;
     speed = 0;
 }
 else {
-    // Se pisar no ácido durante a perseguição ou volta
-    if (place_meeting(x, y, Obj_acido)) {
+    // --- COLISÃO DO ÁCIDO (PÉS) ---
+    var _largura_pes = 12; // Ajuste para os lados dos pés
+    var _altura_pe = 6;    // Ajuste para a altura dos pés
+    
+    var _pisou_no_acido = collision_rectangle(
+        x - _largura_pes, y - _altura_pe, 
+        x + _largura_pes, y, 
+        Obj_acido, false, true
+    );
+
+    if (_pisou_no_acido) {
         estado = "derrotado_acido";
         speed = 0;
         sprite_index = Spr_boos_caido;
     } 
     else {
-        #region /////////------ ATUALIZAÇÃO DE DIREÇÃO (LADO)
+        // --- DIREÇÃO BASEADA NO ÂNGULO (DIRECTION) ---
+        if (speed > 0) {
+            image_speed = 1;
+            
+            if (direction >= 45 && direction < 135) {
+                lado = 1; // Cima
+            }
+            else if (direction >= 135 && direction < 225) {
+                lado = 3; // Esquerda
+            }
+            else if (direction >= 225 && direction < 315) {
+                lado = 0; // Baixo
+            }
+            else {
+                lado = 2; // Direita
+            }
+        } else {
+            image_speed = 0.5;
+        }
 
-        // Atualiza o lado com base na velocidade vetorial nativa
-        if (hspeed > 0) lado = 2; // Direita
-        if (hspeed < 0) lado = 3; // Esquerda
-        if (vspeed > 0) lado = 0; // Baixo
-        if (vspeed < 0) lado = 1; // Cima
-
-        #endregion ////////////////////////////////
-
-        #region /////////------ SELEÇÃO DE SPRITE
-
-        if (hspeed != 0 || vspeed != 0) {
-            // Sprites em movimento
+        // --- SELEÇÃO DE SPRITE (PARADO OU ANDANDO) ---
+        if (speed > 0) {
+            // Sprites ANDANDO
             if (lado == 0) sprite_index = Spr_andando_baixo;
             if (lado == 1) sprite_index = Spr_andando_cima;
-            if (lado == 2) sprite_index = Spr_andando_direita;
-            if (lado == 3) sprite_index = Spr_andando_esquerda;
-        }
+            if (lado == 2) sprite_index = Spr_andando_esquerda;
+            if (lado == 3) sprite_index = Spr_andando_direita;
+        } 
         else {
-            // Sprites parado
+            // Sprites PARADO
             if (lado == 0) sprite_index = Spr_parado_baixo;
             if (lado == 1) sprite_index = Spr_parado_cima;
-            if (lado == 2) sprite_index = Spr_parado_direita;
-            if (lado == 3) sprite_index = Spr_parado_esquerda;
+            if (lado == 2) sprite_index = Spr_parado_esquerda;
+            if (lado == 3) sprite_index = Spr_parado_direita;
         }
-
-        #endregion ////////////////////////////////
     }
 }
 

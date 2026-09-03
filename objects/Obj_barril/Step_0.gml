@@ -30,7 +30,7 @@ if (sprite_index == Spr_barril_caindo) {
 if (transicao_iniciada) {
     alpha_caindo -= 0.005; // Ajuste para sumir mais rápido ou mais devagar
     
-    // 1. DESTRÓI A POÇA DE ÁCIDO ANTES (quando o alpha chegar em 0.3/30% visível)
+    // DESTRÓI A POÇA DE ÁCIDO ANTES (quando o alpha chegar em 0.3/30% visível)
     if (alpha_caindo <= 0.5) {
         if (instance_exists(poca_acido)) {
             instance_destroy(poca_acido);
