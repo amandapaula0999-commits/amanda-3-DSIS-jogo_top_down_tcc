@@ -1,1 +1,2 @@
-tempo_para_sumir = true; // Libera o início do desvanecimento após 1 segundo
+// Destrói a poça de ácido
+instance_destroy();
