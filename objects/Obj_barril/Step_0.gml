@@ -28,7 +28,7 @@ if (sprite_index == Spr_barril_caindo) {
 
 // Se a transição começou, reduz o alpha (transparência)
 if (transicao_iniciada) {
-    alpha_caindo -= 0.005; // Ajuste para sumir mais rápido ou mais devagar
+    alpha_caindo -= 0.002; // Ajuste para sumir mais rápido ou mais devagar
     
     // Quando sumir por completo, fixa permanentemente na sprite do chão
     if (alpha_caindo <= 0) {
