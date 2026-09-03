@@ -72,9 +72,9 @@ if (!derrotado) {
     if (speed > 0) {
         // SPRITES DE CAMINHADA (Em movimento)
         switch (_dir_4_lados) {
-            case 0: sprite_index = Spr_andando_esquerda; break; // Olhando/Andando para a Esquerda
+            case 0: sprite_index = Spr_andando_direita; break; // Olhando/Andando para a dirita
             case 1: sprite_index = Spr_andando_cima; break;     // Olhando/Andando para Cima
-            case 2: sprite_index = Spr_andando_direita; break;  // Olhando/Andando para a Direita
+            case 2: sprite_index = Spr_andando_esquerda; break;  // Olhando/Andando para a esquerda
             case 3: sprite_index = Spr_andando_baixo; break;    // Olhando/Andando para Baixo
         }
     } else {
